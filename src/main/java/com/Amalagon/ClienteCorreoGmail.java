@@ -29,28 +29,28 @@ public class ClienteCorreoGmail {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true"); // Requerido por Gmail
-        props.put("mail.smtp.host", "smtp.gmail.com"); [cite: 70]
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587"); // Puerto estándar para STARTTLS
 
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USUARIO, APP_PASSWORD); [cite: 71]
+                return new PasswordAuthentication(USUARIO, APP_PASSWORD);
             }
         });
 
         try {
-            Message message = new MimeMessage(session); [cite: 72]
-            message.setFrom(new InternetAddress(USUARIO)); [cite: 73]
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(DESTINATARIO)); [cite: 73]
-            message.setSubject("Prueba PSP Correo"); [cite: 74]
-            message.setText("Mensaje de prueba desde Java - SMTP OK"); [cite: 74, 75]
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(USUARIO));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(DESTINATARIO));
+            message.setSubject("Prueba PSP Correo");
+            message.setText("Mensaje de prueba desde Java - SMTP OK");
 
-            Transport.send(message); [cite: 76]
-            System.out.println("✅ Correo enviado con éxito."); [cite: 77]
+            Transport.send(message);
+            System.out.println("✅ Correo enviado con éxito.");
 
         } catch (MessagingException e) {
-            System.err.println("❌ Error al enviar el correo: " + e.getMessage()); [cite: 77]
+            System.err.println("❌ Error al enviar el correo: " + e.getMessage());
         }
     }
 
@@ -59,30 +59,30 @@ public class ClienteCorreoGmail {
 
         Properties props = new Properties();
         props.put("mail.store.protocol", "pop3s");
-        props.put("mail.pop3s.host", "pop.gmail.com"); [cite: 79]
-        props.put("mail.pop3s.port", "995"); [cite: 79]
-        props.put("mail.pop3s.ssl.enable", "true"); [cite: 79]
+        props.put("mail.pop3s.host", "pop.gmail.com");
+        props.put("mail.pop3s.port", "995");
+        props.put("mail.pop3s.ssl.enable", "true");
 
         try {
             Session session = Session.getInstance(props);
-            Store store = session.getStore("pop3s"); [cite: 80]
-            store.connect(USUARIO, APP_PASSWORD); [cite: 80, 81]
+            Store store = session.getStore("pop3s");
+            store.connect(USUARIO, APP_PASSWORD);
 
             Folder folder = store.getFolder("INBOX");
             folder.open(Folder.READ_ONLY);
 
-            Message[] messages = folder.getMessages(); [cite: 82]
+            Message[] messages = folder.getMessages();
             System.out.println("Bandeja de entrada: " + messages.length + " mensajes.");
 
             // Buscamos el mensaje enviado desde el final (los más recientes)
             boolean encontrado = false;
             for (int i = messages.length - 1; i >= 0; i--) {
                 Message msg = messages[i];
-                if (msg.getSubject() != null && msg.getSubject().equals("Prueba PSP Correo")) { [cite: 82, 83]
+                if (msg.getSubject() != null && msg.getSubject().equals("Prueba PSP Correo")) {
                     System.out.println("\n✉️ ¡Mensaje de prueba encontrado!");
-                    System.out.println("Remitente: " + msg.getFrom()[0]); [cite: 84]
-                    System.out.println("Asunto: " + msg.getSubject()); [cite: 84]
-                    System.out.println("Contenido:\n" + msg.getContent().toString()); [cite: 84]
+                    System.out.println("Remitente: " + msg.getFrom()[0]);
+                    System.out.println("Asunto: " + msg.getSubject());
+                    System.out.println("Contenido:\n" + msg.getContent().toString());
                     encontrado = true;
                     break;
                 }
@@ -93,7 +93,7 @@ public class ClienteCorreoGmail {
             }
 
             folder.close(false);
-            store.close(); [cite: 84]
+            store.close();
             System.out.println("\nConexión POP3 cerrada.");
 
         } catch (Exception e) {
