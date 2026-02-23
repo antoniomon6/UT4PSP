@@ -20,7 +20,7 @@ public class ClienteTelnetSimple {
              BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              PrintWriter salida = new PrintWriter(socket.getOutputStream(), true)) {
 
-            System.out.println("Conexión establecida con " + host + ":" + puerto + " [cite: 36]");
+            System.out.println("Conexión establecida con " + host + ":" + puerto);
 
             // 1. Leer y mostrar el mensaje de bienvenida del servidor [cite: 37]
             String mensajeBienvenida = entrada.readLine();
@@ -35,7 +35,7 @@ public class ClienteTelnetSimple {
             String respuestaServidor = entrada.readLine();
             System.out.println("Respuesta (Eco) del servidor: " + respuestaServidor);
 
-            System.out.println("Cerrando la conexión... [cite: 40]");
+            System.out.println("Cerrando la conexión...");
 
         } catch (UnknownHostException e) {
             System.err.println("Error: Host desconocido - " + e.getMessage());

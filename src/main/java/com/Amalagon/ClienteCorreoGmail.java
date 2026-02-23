@@ -6,9 +6,9 @@ import java.util.Properties;
 public class ClienteCorreoGmail {
 
     // Configura aquí tus credenciales (¡Recuerda no subir este archivo a un repositorio público con tus contraseñas!)
-    private static final String USUARIO = "tu_correo@gmail.com";
-    private static final String APP_PASSWORD = "tu_contraseña_de_aplicacion";
-    private static final String DESTINATARIO = "tu_correo@gmail.com"; // Puede ser a ti mismo
+    private static final String USUARIO = "antoniomalagar06@gmail.com";
+    private static final String APP_PASSWORD = "wrso ofhb letj qjyk";
+    private static final String DESTINATARIO = "antoniomalagar06@gmail.com"; // Puede ser a ti mismo
 
     public static void main(String[] args) {
         System.out.println("--- Iniciando Cliente de Correo ---");
